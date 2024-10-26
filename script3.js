@@ -27,11 +27,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     audioPlayer.addEventListener('timeupdate', updateLyrics);
 
-    const notification = document.getElementById('fullscreen-notification');
-    if (notification) {
-        notification.addEventListener('click', function() {
-            if (!notification.classList.contains('hidden')) {
-                notification.classList.add('hidden');
-            }
-        });
-    }
+     const notification = document.getElementById('fullscreen-notification');
+
+   // Добавляем обработчик события на нажатие
+   notification.addEventListener('click', function() {
+       // Проверяем, есть ли класс "hidden"
+       if (!notification.classList.contains('hidden')) {
+           // Добавляем класс, чтобы скрыть уведомление
+           notification.classList.add('hidden');
+       }
+   });
