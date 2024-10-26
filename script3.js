@@ -16,7 +16,7 @@ audioPlayer.addEventListener('timeupdate', () => {
   }
 });
 
-   // Получаем элемент уведомления
+ // Получаем элемент уведомления
    const notification = document.getElementById('fullscreen-notification');
 
    // Добавляем обработчик события на нажатие
