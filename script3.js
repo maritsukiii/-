@@ -1,26 +1,20 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const audioPlayer = document.getElementById('audioPlayer');
-    const lyricsContainer = document.getElementById('lyricsContainer');
-    const lyricsLines = lyricsContainer.getElementsByTagName('p');
-  
-    function updateLyrics() {
-      const currentTime = audioPlayer.currentTime;
-  
-      for (let i = 0; i < lyricsLines.length; i++) {
-        const lineTime = parseFloat(lyricsLines[i].getAttribute('data-time'));
-        const nextLineTime = lyricsLines[i + 1] ? parseFloat(lyricsLines[i + 1].getAttribute('data-time')) : Infinity;
-  
-        if (currentTime >= lineTime && currentTime < nextLineTime) {
-          lyricsLines[i].classList.add('active');
-          lyricsLines[i].scrollIntoView({ behavior: 'smooth', block: 'center' });
-        } else {
-          lyricsLines[i].classList.remove('active');
-        }
-      }
+const audioPlayer = document.getElementById('audioPlayer');
+const lyrics = document.querySelectorAll('#lyricsContainer p');
+let currentLineIndex = 0;
+
+audioPlayer.addEventListener('timeupdate', () => {
+  const currentTime = audioPlayer.currentTime;
+
+  if (currentLineIndex < lyrics.length) {
+    const lineTime = parseFloat(lyrics[currentLineIndex].getAttribute('data-time'));
+
+    if (currentTime >= lineTime) {
+      lyrics.forEach((line) => line.classList.remove('active'));
+      lyrics[currentLineIndex].classList.add('active');
+      currentLineIndex++;
     }
-  
-    audioPlayer.addEventListener('timeupdate', updateLyrics);
-  });
+  }
+});
 
    // Получаем элемент уведомления
    const notification = document.getElementById('fullscreen-notification');
